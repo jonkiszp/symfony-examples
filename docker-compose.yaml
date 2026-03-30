@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: symfony
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - php-net
 
   php:
     build:
@@ -16,6 +18,9 @@ services:
       - .:/var/www/html
     environment:
       DATABASE_URL: "postgresql://symfony:password@database:5432/symfony_db?serverVersion=16&charset=utf8"
+    networks:
+      - php-net
+      - nginx-net
 
   nginx:
     image: nginx:alpine
@@ -26,6 +31,15 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - php
+    networks:
+      - nginx-net
 
 volumes:
   db-data:
+
+
+networks:
+  nginx-net:
+    driver: bridge
+  php-net:
+    driver: bridge
