@@ -23,7 +23,7 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      DATABASE_URL: "postgresql://symfony:password@database:5432/symfony_db?serverVersion=16&charset=utf8"
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=16&charset=utf8"
     networks:
       - php-net
       - nginx-net
