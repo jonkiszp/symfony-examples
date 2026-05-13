@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/info', name: 'info')]
 class InfoController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'info_index')]
     public function info(): Response
     {
         return $this->render('index/index.html.twig', [
