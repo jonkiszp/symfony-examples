@@ -29,4 +29,12 @@ class PostRepository extends ServiceEntityRepository {
         $query = $qb->getQuery();
         return $query->execute();
     }
+
+    public function add(Post $post) {
+        $this->getEntityManager()->persist($post);
+    }
+
+    public function save() {
+        $this->getEntityManager()->flush();
+    }
 }
