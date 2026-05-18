@@ -13,7 +13,7 @@ class PostController extends AbstractController
     #[Route('/posts', name: 'post_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
-        $posts = $entityManager->getRepository(Post::class)->findAll();
+        $posts = $entityManager->getRepository(Post::class)->findByTitleSQL('Title');
 
         return $this->render('post/list.html.twig', [
             'posts' => $posts,
